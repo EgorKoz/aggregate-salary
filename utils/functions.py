@@ -6,7 +6,7 @@ from utils.db import aggregate_data
 from utils.constant import TYPE_FORMATS, ERROR_STRING
 
 
-def get_aggregate_salary(params: dict) -> str:
+def get_aggregated_salary(params: dict) -> str:
     try:
         dt_from = dt.fromisoformat(params['dt_from'])
         dt_upto = dt.fromisoformat(params['dt_upto'])

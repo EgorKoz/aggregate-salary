@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  db:
+   image: mongo:latest
+   ports:
+     - "27017:27017"
+   restart: always
+   volumes:
+     - mongo_data:/data/db
+     - mongo_config:/data/configdb
+   container_name: "mongo_db"
+
+  bot:
+    build: .
+    command: sh -c 'python -m main'
+    restart: always
+    env_file:
+        - ./.env
+    depends_on:
+        - db
+
+volumes:
+  mongo_data:
+  mongo_config:

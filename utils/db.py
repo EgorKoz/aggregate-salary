@@ -1,4 +1,6 @@
 """Module db function"""
+import logging
+
 import bson
 from datetime import datetime
 
@@ -7,8 +9,8 @@ from pymongo.collection import Collection, CommandCursor
 
 
 def get_collection() -> Collection:
-    collection = MongoClient(
-        'localhost', 27017)['task'].get_collection('salary')
+    logging.info('get collection')
+    collection = MongoClient('mongo_db', 27017)['task'].get_collection('salary')
     if not collection.find_one():
         with open('sample_collection.bson', 'rb') as bson_file:
             collection.insert_many(bson.decode_all(bson_file.read()))
